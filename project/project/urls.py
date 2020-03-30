@@ -20,15 +20,11 @@ from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
 # from project.user import views as user_view
-from django.contrib.auth import views as auth
+# from django.contrib.auth import views as auth
 
 urlpatterns = [
 
     path('admin/', admin.site.urls),
     path('', include('user.urls')),
-
-
-]
-if settings.DEBUG: # new
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

@@ -1,15 +1,16 @@
 from django import forms
-from django.contrib.auth import authenticate
+from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import User
 from .models import Signup
 from django.contrib.auth.forms import UserCreationForm
 
 class SignupForm(forms.ModelForm):
+
     name = forms.CharField(required=True, widget=forms.TextInput(
         attrs={'class': 'form-control', 'placeholder': 'Enter the first name'
                }))
 
-    photo = forms.ImageField(required=True, widget=forms.ImageField(
+    photo = forms.FileField(required=True, widget=forms.FileInput(
         attrs={'class': 'form-control', 'required': True, 'multiple': True, 'accept': 'image/*'}))
 
     email = forms.EmailField(required=True, widget=forms.EmailInput(
@@ -27,4 +28,4 @@ class SignupForm(forms.ModelForm):
 
     class Meta:
         model = Signup
-        fields = ('name', 'email', 'username', 'password', 'contact','cover')
+        fields = ('name', 'photo', 'email', 'username', 'password', 'contact')

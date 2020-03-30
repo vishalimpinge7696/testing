@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-  {% load static %}
+{% load static %}
+{% load crispy_forms_tags %}
 	<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
@@ -35,6 +36,7 @@ body {
 }
 </style>
 </head>
+
 <body>
 
 <div class="topnav">
@@ -42,13 +44,15 @@ body {
   <a href="#news">News</a>
   <a href="#contact">Contact</a>
   <a href="#about">About</a>
-</div>
-{% if user.is_authenticated %}
+  <div class="topnav-right">
+                {% if user.is_authenticated %}
                 <a href="/logout" class="property-sub">LOGOUT</a>
                 {% else %}
                 <a href="/signup" class="property-sub">SIGN UP</a>
                 <a href="/signin" class="property-sub">SIGN IN</a>
                 {% endif %}
+  </div>
+</div>
 <div style="padding-left:16px">
   <h2>SIGNUP & LOGIN Example</h2>
   <p></p>
@@ -72,7 +76,7 @@ body {
 				<div class="panel-body">
 					<form name="LoginForm" action="" method="post">
         {% csrf_token %}
-        {{ form.as_p }}
+        {{ form|crispy}}
         {% if next %}
             <input type="hidden" name="next" value="{{ next }}" />
         {% endif %}
@@ -97,7 +101,7 @@ body {
 
         <div class="form-group">
             <div class="col-sm-offset-3 col-sm-6">
-                <button type="submit" class="btn btn-success ">Login</button>
+                <button type="submit" class="btn btn-success "><a href="{% url 'signin' %}"></a>Login</button>
             </div>
         </div>
          </center>
